@@ -1,9 +1,13 @@
 import jwt from "jsonwebtoken"
-import { decode } from "jsonwebtoken"
-import users from "../../dataBase/dataBase"
+import users from "../dataBase/dataBase"
 
 export default function verifyTokenMiddleware(req, res, next) {
+   try {
     const {authorization} = req.headers
+
+    if (!authorization) {
+        return res.status(401).json({message: "Missing authorization headers"})
+    }
 
     const token = authorization.split(' ')[1]
     
@@ -16,7 +20,7 @@ export default function verifyTokenMiddleware(req, res, next) {
             return res.status(401).json({message: "Invalid Token"})
         }
 
-        const client = users.find((user) => user.email === decoded.email)
+        const client = users.find((user) => user.id === decoded.id)
       
         if (!client) {
             return res.status(404).json({message: "User not found."})
@@ -28,5 +32,7 @@ export default function verifyTokenMiddleware(req, res, next) {
     req.token = token
 
     next()
+   } catch (error) {
+       console.log(error)
+   }
 }
-

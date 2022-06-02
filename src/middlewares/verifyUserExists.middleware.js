@@ -1,4 +1,4 @@
-import users from "../../dataBase/dataBase"
+import users from "../dataBase/dataBase"
 
 export default function verifyUserExistsMiddleware(req, res, next) {
     const {id} = req.params

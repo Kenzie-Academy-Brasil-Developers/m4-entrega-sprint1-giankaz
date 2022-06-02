@@ -1,4 +1,4 @@
-import users from "../../dataBase/dataBase"
+import users from "../dataBase/dataBase"
 
 export default function createUserMiddleware(req, res, next) {
     const { email, password, name, isAdm } = req.body
@@ -10,7 +10,7 @@ export default function createUserMiddleware(req, res, next) {
     const userExists = users.find(user => user.email === email)
 
     if (userExists) {
-        return res.status(400).json({ message: "E-mail already exists." })
+        return res.status(400).json({ message: "E-mail already registered" })
     }
 
     next()

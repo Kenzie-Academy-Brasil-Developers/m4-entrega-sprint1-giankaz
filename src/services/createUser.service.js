@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid'
-import users from '../../dataBase/dataBase'
+import users from '../dataBase/dataBase'
 import * as bcrypt from "bcryptjs";
 
 export default async function createUserService(email, password, name, isAdm) {
@@ -17,7 +17,7 @@ export default async function createUserService(email, password, name, isAdm) {
         isAdm,
         createdOn: today,
         updatedOn: today,
-        id: uuidv4()
+        uuid: uuidv4()
     }
 
     const userToSend = {
@@ -26,7 +26,7 @@ export default async function createUserService(email, password, name, isAdm) {
         isAdm,
         createdOn: today,
         updatedOn: today,
-        id: newUser.id
+        uuid: newUser.uuid
     }
 
     users.push(newUser)
