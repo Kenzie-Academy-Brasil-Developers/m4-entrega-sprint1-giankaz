@@ -1,6 +1,6 @@
-import express from 'express'
 import routes from './routes/users.routes'
 import loginRoutes from './routes/login.routes'
+const express = require('express')
 
 const mongoose = require('mongoose')
 
