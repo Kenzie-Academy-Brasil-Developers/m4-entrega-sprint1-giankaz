@@ -1,20 +1,25 @@
 import jwt from 'jsonwebtoken'
-import users from '../dataBase/dataBase'
 import * as bcrypt from 'bcryptjs'
 
-export default function loginUserService(email, password) {
-    const client = users.find((user) => user.email === email)
+const Users = require('../schemas/db.schema')
+
+export default async function loginUserService(email, password) {
+    const client = await Users.findOne({email: email})
+
+
 
     if (!client) {
        throw new Error("User not found.")
     }
 
-    const token = jwt.sign({ id: client.id }, 'SECRET_KEY', { expiresIn: "24h" })
+    const token = jwt.sign({ uuid: client.uuid }, 'SECRET_KEY', { expiresIn: "24h" })
+
    
 
+ 
 
+    const passwordCheck = bcrypt.compareSync(password, client.password)
 
-    const passwordCheck = bcrypt.compareSync(password, client.hashPassword)
 
     if (!passwordCheck) {
        throw new Error("Wrong email/password")

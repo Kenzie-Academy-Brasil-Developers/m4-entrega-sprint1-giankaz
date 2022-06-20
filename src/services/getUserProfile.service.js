@@ -1,7 +1,9 @@
-import users from "../dataBase/dataBase";
+const Users = require('../schemas/db.schema')
 
-export default function getUserProfileService(id) {
-    const client = users.find((user) => user.id === id)
+export default async function getUserProfileService(id) {
+    const client = await Users.findOne({uuid : id})
+
+
 
     return client
 

@@ -1,8 +1,11 @@
 import listUserService from "../services/listUser.service";
 
-export default function listUserController(req, res) {
+export default async function listUserController(req, res) {
 
-   const users = listUserService()
+   
+      const users = await listUserService()
 
-   return res.status(200).json(users)
+       return res.status(200).json(users) 
+      
+ 
 }

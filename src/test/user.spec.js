@@ -98,6 +98,7 @@ describe("Testando rota GET /users", () => {
     const response = await request(app)
       .get("/users")
       .set("Authorization", `Bearer ${token}`);
+    console.log(response.error);
     expect(response.status).toBe(401);
     expect(response.body).toHaveProperty("message", "Unauthorized");
   });

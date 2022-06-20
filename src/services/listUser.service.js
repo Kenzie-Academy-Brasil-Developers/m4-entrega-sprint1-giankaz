@@ -1,5 +1,9 @@
-import users from "../dataBase/dataBase";
+const Users = require('../schemas/db.schema')
 
-export default function listUserService() {
- return users
+export default async function listUserService() {
+    const allUsers = await Users.find()
+
+
+
+    return allUsers
 }

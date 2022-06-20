@@ -1,11 +1,14 @@
 import updateUserService from "../services/updateUser.service"
 
-export default function updateUserController(req, res) {
-        const {id} = req.params
+export default async function updateUserController(req, res) {
+        const {uuid} = req.params
+   
         const newClient = req.body
 
+
+
         try {
-            const updatedClient = updateUserService(newClient, id)
+            const updatedClient = await updateUserService(newClient, uuid)
 
             return res.status(200).json(updatedClient)
 

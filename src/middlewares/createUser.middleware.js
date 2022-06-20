@@ -1,13 +1,13 @@
-import users from "../dataBase/dataBase"
+const Users = require('../schemas/db.schema')
 
-export default function createUserMiddleware(req, res, next) {
+export default async function createUserMiddleware(req, res, next) {
     const { email, password, name, isAdm } = req.body
 
     if (!email || !password || !name || isAdm === undefined) {
         return res.status(400).json({ message: "Missing data." })
     }
 
-    const userExists = users.find(user => user.email === email)
+    const userExists = await Users.findOne({email: email})
 
     if (userExists) {
         return res.status(400).json({ message: "E-mail already registered" })

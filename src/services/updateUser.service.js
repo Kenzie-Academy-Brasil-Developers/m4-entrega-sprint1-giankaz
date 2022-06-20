@@ -1,8 +1,10 @@
-import users from "../dataBase/dataBase";
+const Users = require('../schemas/db.schema')
+import * as bcrypt from 'bcryptjs'
 
 
-export default function updateUserService(newClient, id) {
-    const client = users.findIndex(user => user.id === id)
+export default async function updateUserService(newClient, uuid) {
+    const client = await Users.findOne({ uuid: uuid })
+
 
     const date = new Date()
 
@@ -10,31 +12,24 @@ export default function updateUserService(newClient, id) {
 
     newClient.updatedOn = today
 
+    if (newClient.password) {
+        const hashPassword = await bcrypt.hash(newClient.password, 10)
+        newClient.password = hashPassword
+    }
+
+
 
     if (newClient.isAdm !== undefined) {
         throw new Error("Not allowed to change admin field.")
     }
 
-    if (newClient.email) {
-        const emailExists = users.find((user) => user.email === newClient.email)
-        if (emailExists) {
-            throw new Error("E-mail already exists.")
+    const updatedUser = await Users.updateOne({ uuid: uuid }, { ...newClient })
 
-        }
-    }
+    const user = await Users.findOne({ uuid: uuid }).lean()
 
-    users[client] = { ...users[client], ...newClient }
+    delete user.password
 
-    const response = {
-        id: users[client].id,
-        email: users[client].email,
-        name: users[client].name,
-        createdOn: users[client].createdOn,
-        updatedOn: users[client].updatedOn,
-        isAdm: users[client].isAdm
-    }
-
-    return response
+    return user
 
 }
 
