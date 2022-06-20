@@ -30,4 +30,4 @@ routes.delete('/:uuid', verifyTokenMiddleware, verifyAdmGetMiddleware, deleteUse
 
 
 
-export default routes 
+module.exports = routes 

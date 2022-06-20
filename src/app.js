@@ -1,5 +1,5 @@
-import routes from './routes/users.routes'
-import loginRoutes from './routes/login.routes'
+const routes = require('./routes/users.routes')
+const loginRoutes = require('./routes/login.routes')
 const express = require('express')
 
 const mongoose = require('mongoose')
@@ -23,4 +23,3 @@ app.listen(process.env.PORT || 3000, () => {
 })
 
 
-export default app

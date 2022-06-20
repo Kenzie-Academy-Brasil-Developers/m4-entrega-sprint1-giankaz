@@ -6,4 +6,4 @@ const loginRoutes = Router()
 loginRoutes.post('', loginUserController)
 
 
-export default loginRoutes
+module.exports = loginRoutes
