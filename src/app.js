@@ -18,7 +18,7 @@ app.use(express.json())
 app.use('/users', routes)
 app.use('/login', loginRoutes)
 
-app.listen(3001, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('Open');
 })
 
