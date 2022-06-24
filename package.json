@@ -5,6 +5,7 @@
   "repository": "https://github.com/Kenzie-Academy-Brasil-Developers/m4-entrega-sprint1-pedrocostakenzie.git",
   "author": "Pedro Costa <phmc99@outlook.com>",
   "license": "MIT",
+  
   "scripts": {
     "test": "jest",
     "start": "node src/app.js",
